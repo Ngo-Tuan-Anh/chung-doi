@@ -14,7 +14,7 @@ window.WEDDING = {
   // Có thể dán liên kết Google Maps chính xác vào ba trường dưới đây.
   venueMapUrl: "https://maps.app.goo.gl/ina4r2x3y8wQHAYbA",
   groomMapUrl: "https://maps.app.goo.gl/cDYFQM7iXZ2YAcwr9",
-  brideMapUrl: "",
+  brideMapUrl: "https://maps.app.goo.gl/Lbedj6FZY1n9NP8n7",
   // Điền ảnh QR của bạn; để trống khi chưa có thông tin tài khoản.
   gifts: [
     { label: "Mừng cưới chú rể", qrImage: "", bank: "", accountNumber: "", accountName: "" },
