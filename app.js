@@ -30,8 +30,45 @@ function countdown(){let seconds=Math.max(0,Math.floor((date-Date.now())/1000));
 countdown();setInterval(countdown,1000);
 c.timeline.forEach(([time,label])=>{const el=document.createElement('div');el.className='event';const t=document.createElement('time'),s=document.createElement('span');t.textContent=time;s.textContent=label;el.append(t,s);document.getElementById('timeline').append(el);});
 const lightbox=document.getElementById('lightbox');
-c.gallery.forEach((src,i)=>{const b=document.createElement('button'),img=document.createElement('img');b.type='button';b.setAttribute('aria-label',`Xem ảnh cưới ${i+1}`);img.src=src;img.alt=`Khoảnh khắc cưới ${i+1}`;img.loading='lazy';img.decoding='async';b.append(img);b.onclick=()=>{document.getElementById('large-photo').src=src;lightbox.showModal();};document.getElementById('gallery').append(b);});
+const album=document.getElementById('album'),gallery=document.getElementById('gallery');
+const photos=c.gallery||[],slides=[],dots=[];
+let activePhoto=0,albumTimer=null,albumVisible=false,albumPaused=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const albumToggle=document.getElementById('album-toggle');
+function renderAlbum(){
+  slides.forEach((slide,i)=>{
+    const offset=(i-activePhoto+photos.length)%photos.length;
+    slide.className='album-slide'+(offset===0?' active':offset===1?' next':offset===photos.length-1?' previous':'');
+    slide.tabIndex=offset===0?0:-1;slide.setAttribute('aria-hidden',offset===0?'false':'true');
+    dots[i].setAttribute('aria-current',offset===0?'true':'false');
+  });
+  document.getElementById('album-counter').textContent=photos.length?`${activePhoto+1} / ${photos.length}`:'Chưa có ảnh';
+}
+function stopAlbum(){clearInterval(albumTimer);albumTimer=null;}
+function syncAlbum(){
+  stopAlbum();albumToggle.textContent=albumPaused?'Tự động chạy':'Tạm dừng';
+  if(photos.length>1&&albumVisible&&!albumPaused&&!document.hidden&&!lightbox.open)albumTimer=setInterval(()=>{activePhoto=(activePhoto+1)%photos.length;renderAlbum();},3500);
+}
+function movePhoto(step){if(!photos.length)return;activePhoto=(activePhoto+step+photos.length)%photos.length;renderAlbum();syncAlbum();}
+photos.forEach((src,i)=>{
+  const b=document.createElement('button'),img=document.createElement('img');b.type='button';b.setAttribute('aria-label',`Xem ảnh cưới ${i+1}`);img.src=src;img.alt=`Khoảnh khắc cưới ${i+1}`;img.loading='lazy';img.decoding='async';b.append(img);
+  b.onclick=()=>{document.getElementById('large-photo').src=src;lightbox.showModal();syncAlbum();};gallery.append(b);slides.push(b);
+  const dot=document.createElement('button');dot.type='button';dot.setAttribute('aria-label',`Chuyển đến ảnh ${i+1}`);dot.onclick=()=>{activePhoto=i;renderAlbum();syncAlbum();};document.getElementById('album-dots').append(dot);dots.push(dot);
+});
+document.getElementById('album-prev').onclick=()=>movePhoto(-1);
+document.getElementById('album-next').onclick=()=>movePhoto(1);
+albumToggle.onclick=()=>{albumPaused=!albumPaused;syncAlbum();};
+album.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();movePhoto(e.key==='ArrowLeft'?-1:1);}});
+let touchStartX=null;
+gallery.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;},{passive:true});
+gallery.addEventListener('touchend',e=>{if(touchStartX===null)return;const delta=e.changedTouches[0].clientX-touchStartX;if(Math.abs(delta)>50)movePhoto(delta<0?1:-1);touchStartX=null;},{passive:true});
+album.addEventListener('mouseenter',stopAlbum);album.addEventListener('mouseleave',syncAlbum);
+album.addEventListener('focusin',stopAlbum);album.addEventListener('focusout',e=>{if(!album.contains(e.relatedTarget))syncAlbum();});
+document.addEventListener('visibilitychange',syncAlbum);
+new IntersectionObserver(entries=>{albumVisible=entries[0].isIntersecting;syncAlbum();},{threshold:.2}).observe(album);
+renderAlbum();syncAlbum();
+if(photos.length<2)document.querySelector('.album-controls').hidden=true;
 document.getElementById('close-photo').onclick=()=>lightbox.close();
+lightbox.addEventListener('close',syncAlbum);
 lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.close();});
 const audio=document.getElementById('audio'),music=document.getElementById('music');
 const youtubeId=/^[A-Za-z0-9_-]{11}$/.test(c.musicYoutubeId||'')?c.musicYoutubeId:'';
