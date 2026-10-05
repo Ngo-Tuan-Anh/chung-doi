@@ -46,3 +46,6 @@ h1,h2,.couple,.hero h2{font-family:"Playfair Display",Baskerville,"Times New Rom
 
 .hero-slideshow{position:absolute;inset:0;overflow:hidden}.hero-track{display:flex;width:100%;height:100%;animation:hero-slide 6s infinite;animation-play-state:paused}.hero-track .hero-photo{flex:0 0 100%;min-width:100%}.hero.slideshow-running .hero-track{animation-play-state:running}
 @keyframes hero-slide{0%,38%{transform:translateX(0)}50%,88%{transform:translateX(-100%)}100%{transform:translateX(-200%)}}
+
+/* Keep reception times aligned even when descriptions wrap. */
+.timeline{max-width:440px;margin:32px auto 0}.timeline .event{display:grid;grid-template-columns:70px minmax(0,1fr);gap:24px;align-items:center;padding:18px 0}.timeline .event time{white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right;line-height:1.5}.timeline .event span{text-align:left;line-height:1.5;overflow-wrap:break-word}.timeline .event:last-child{border-bottom:0}@media(max-width:600px){.timeline .event{grid-template-columns:64px minmax(0,1fr);gap:18px}.timeline .event time{font-size:18px}}
