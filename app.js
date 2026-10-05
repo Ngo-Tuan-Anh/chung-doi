@@ -54,7 +54,7 @@ function syncAlbum(){
 function movePhoto(step){if(!photos.length)return;activePhoto=(activePhoto+step+photos.length)%photos.length;renderAlbum();syncAlbum();}
 photos.forEach((src,i)=>{
   const b=document.createElement('button'),img=document.createElement('img');b.type='button';b.setAttribute('aria-label',`Xem ảnh cưới ${i+1}`);img.src=src;img.alt=`Khoảnh khắc cưới ${i+1}`;img.loading='lazy';img.decoding='async';b.append(img);
-  b.onclick=()=>{document.getElementById('large-photo').src=src;lightbox.showModal();syncAlbum();};gallery.append(b);slides.push(b);
+  b.onclick=()=>{activePhoto=i;renderAlbum();showLargePhoto();lightbox.showModal();syncAlbum();};gallery.append(b);slides.push(b);
   const dot=document.createElement('button');dot.type='button';dot.setAttribute('aria-label',`Chuyển đến ảnh ${i+1}`);dot.onclick=()=>{activePhoto=i;renderAlbum();syncAlbum();};document.getElementById('album-dots').append(dot);dots.push(dot);
 });
 document.getElementById('album-prev').onclick=()=>movePhoto(-1);
@@ -190,3 +190,16 @@ function launchFireworks(){
   }
   resize();window.addEventListener('resize',resize);document.addEventListener('visibilitychange',onVisibility);frame=requestAnimationFrame(animate);
 }
+
+function showLargePhoto(){
+  const image=document.getElementById('large-photo');image.src=photos[activePhoto];image.alt=`Wedding photo ${activePhoto+1} / ${photos.length}`;
+  document.getElementById('photo-counter').textContent=`${activePhoto+1} / ${photos.length}`;
+}
+function moveLargePhoto(step){if(!photos.length)return;movePhoto(step);showLargePhoto();}
+document.getElementById('photo-prev').onclick=()=>moveLargePhoto(-1);
+document.getElementById('photo-next').onclick=()=>moveLargePhoto(1);
+lightbox.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();moveLargePhoto(e.key==='ArrowLeft'?-1:1);}});
+let photoTouch=null;
+lightbox.addEventListener('touchstart',e=>{photoTouch=e.touches.length===1?{x:e.touches[0].clientX,y:e.touches[0].clientY}:null;},{passive:true});
+lightbox.addEventListener('touchend',e=>{if(!photoTouch)return;const dx=e.changedTouches[0].clientX-photoTouch.x,dy=e.changedTouches[0].clientY-photoTouch.y;photoTouch=null;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))moveLargePhoto(dx<0?1:-1);},{passive:true});
+lightbox.addEventListener('touchcancel',()=>{photoTouch=null;});
