@@ -76,7 +76,7 @@ let youtubePlayer=null,youtubeReady=false,musicStarted=false,wantsMusic=false;
 function setMusicLabel(playing){music.textContent=playing?'Ⅱ':'♫';music.setAttribute('aria-label',playing?'Tắt nhạc':'Bật nhạc');}
 function musicLabel(){setMusicLabel(!audio.paused);}
 const musicStatus=document.getElementById('music-status');
-if(youtubeId){music.hidden=false;document.getElementById('wedding-music').hidden=false;}
+if(youtubeId){music.hidden=false;}
 else if(c.music){audio.src=c.music;music.hidden=false;}
 function createYoutubePlayer(){
   if(youtubePlayer)return;
