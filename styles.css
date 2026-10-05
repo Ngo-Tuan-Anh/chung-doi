@@ -56,3 +56,6 @@ h1,h2,.couple,.hero h2{font-family:"Playfair Display",Baskerville,"Times New Rom
 @media(min-width:768px){main{max-width:620px}.hero{height: min(95svh,820px)}.paper{padding-left:36px;padding-right:36px}}
 
 #lightbox{overflow:hidden}#large-photo{touch-action:pan-y pinch-zoom}#lightbox .photo-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:1;padding:0;width:42px;height:48px;font-size:36px;background:#19472dbb;border-color:#fff0e755}.photo-prev{left:8px}.photo-next{right:8px}#photo-counter{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#fff0e7;background:#102919bb;padding:3px 12px;border-radius:20px;pointer-events:none}#close-photo{z-index:2}
+
+/* Center navigation glyphs independently of the body font metrics. */
+#lightbox .photo-nav{display:flex;align-items:center;justify-content:center;line-height:1;font-family:Arial,sans-serif;padding:0}.album-controls button{display:inline-flex;align-items:center;justify-content:center;line-height:1;min-height:38px}.album-controls #album-prev,.album-controls #album-next{font-family:Arial,sans-serif}
