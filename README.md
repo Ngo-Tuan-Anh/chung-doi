@@ -15,3 +15,11 @@ Mở index.html hoặc chạy python -m http.server 8000 trong thư mục này r
 ## GitHub Pages
 
 Workflow .github/workflows/pages.yml triển khai khi push main. Vào repository → Settings → Pages → Source → chọn GitHub Actions. URL dự kiến: https://ngo-tuan-anh.github.io/chung-doi/
+
+## Tên khách mời trên URL
+
+Tên dưới “Thân Mời” được lấy từ tham số `guest`, ví dụ:
+
+https://ngo-tuan-anh.github.io/chung-doi/?guest=G%C4%90%20b%C3%A1c%20M%E1%BA%A1nh%20-%20Nhung
+
+Nếu thiếu hoặc để trống `guest`, thiệp hiển thị “Quý khách”. Tên cũng được cập nhật trong phần mời dự tiệc. Dùng `encodeURIComponent(tenKhach)` khi tạo URL bằng JavaScript để giữ đúng dấu tiếng Việt và các ký tự đặc biệt.
