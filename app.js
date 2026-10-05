@@ -49,7 +49,7 @@ function syncAlbum(){
   albumToggle.textContent=albumPaused?'\u25b6':'\u2161';
   const toggleLabel=albumPaused?'T\u1ef1 \u0111\u1ed9ng ch\u1ea1y album':'T\u1ea1m d\u1eebng album';
   albumToggle.setAttribute('aria-label',toggleLabel);albumToggle.title=toggleLabel;
-  if(photos.length>1&&albumVisible&&!albumPaused&&!document.hidden&&!lightbox.open)albumTimer=setInterval(()=>{activePhoto=(activePhoto+1)%photos.length;renderAlbum();},3500);
+  if(photos.length>1&&albumVisible&&!albumPaused&&!document.hidden&&!lightbox.open)albumTimer=setInterval(()=>{activePhoto=(activePhoto+1)%photos.length;renderAlbum();},2000);
 }
 function movePhoto(step){if(!photos.length)return;activePhoto=(activePhoto+step+photos.length)%photos.length;renderAlbum();syncAlbum();}
 photos.forEach((src,i)=>{
