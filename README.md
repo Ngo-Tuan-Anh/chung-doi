@@ -23,3 +23,7 @@ Tên dưới “Thân Mời” được lấy từ tham số `guest`, ví dụ:
 https://ngo-tuan-anh.github.io/chung-doi/?guest=G%C4%90%20b%C3%A1c%20M%E1%BA%A1nh%20-%20Nhung
 
 Nếu thiếu hoặc để trống `guest`, thiệp hiển thị “Quý khách”. Tên cũng được cập nhật trong phần mời dự tiệc. Dùng `encodeURIComponent(tenKhach)` khi tạo URL bằng JavaScript để giữ đúng dấu tiếng Việt và các ký tự đặc biệt.
+
+## Bản đồ và mã QR mừng cưới
+
+Trong config.js, điền venueMapUrl, groomMapUrl và brideMapUrl bằng link Google Maps chính xác nếu có. Để trống thì website tạo link tìm kiếm theo địa chỉ. Mục gifts chứa hai hộp thông tin cô dâu/chú rể: đặt qrImage thành đường dẫn ảnh QR (ví dụ assets/qr-chu-re.png), cùng bank, accountNumber và accountName. Khi chưa có ảnh QR, hộp quà hiển thị thông báo chờ cập nhật, không dùng tài khoản demo.
