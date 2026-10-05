@@ -108,7 +108,8 @@ music.onclick=async()=>{
 };
 document.getElementById('open').onclick=()=>{
   document.getElementById('envelope').classList.add('opened');document.body.classList.remove('sealed');document.getElementById('invitation').inert=false;
-  document.querySelector('.scroll').focus({preventScroll:true});
+  document.getElementById('invitation').focus({preventScroll:true});
+  startAutoScroll();
   if(youtubeId)startYoutubeMusic();else if(c.music)audio.play().then(musicLabel).catch(musicLabel);
 };
 document.getElementById('rsvp').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);const text=`Tên: ${f.get('name')}\nTham dự: ${f.get('attendance')}\nLời chúc: ${f.get('wish')||''}`;if(c.rsvpEmail){location.href=`mailto:${c.rsvpEmail}?subject=${encodeURIComponent('Xác nhận dự cưới: '+f.get('name'))}&body=${encodeURIComponent(text)}`;document.getElementById('form-status').textContent='Ứng dụng email sẽ mở. Vui lòng gửi email để hoàn tất xác nhận.';}else{const blob=new Blob([text],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='xac-nhan-du-cuoi.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);document.getElementById('form-status').textContent='Đã tải lời xác nhận. Bạn hãy gửi tệp này cho cô dâu hoặc chú rể để hoàn tất.';}});
@@ -130,3 +131,29 @@ const giftAccounts=document.getElementById('gift-accounts');
   }else{const p=document.createElement('p');p.textContent='Thông tin mừng cưới sẽ được cập nhật. Bạn có thể gửi lời chúc đến chúng mình bên dưới nhé!';card.append(p);}
   giftAccounts.append(card);
 });
+
+// Slowly reveal the invitation; hand control back on any visitor interaction.
+let autoScrollFrame=null,autoScrollDelay=null,autoScrollPosition=0,autoScrollLastTime=null;
+function stopAutoScroll(){
+  clearTimeout(autoScrollDelay);autoScrollDelay=null;
+  if(autoScrollFrame!==null)cancelAnimationFrame(autoScrollFrame);
+  autoScrollFrame=null;autoScrollLastTime=null;
+}
+function advanceAutoScroll(time){
+  if(document.hidden||document.querySelector('dialog[open]')){stopAutoScroll();return;}
+  if(autoScrollLastTime===null)autoScrollLastTime=time;
+  const elapsed=Math.min(time-autoScrollLastTime,100);autoScrollLastTime=time;
+  const bottom=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+  autoScrollPosition=Math.min(bottom,autoScrollPosition+18*elapsed/1000);
+  window.scrollTo({top:autoScrollPosition,behavior:'instant'});
+  if(autoScrollPosition>=bottom){stopAutoScroll();return;}
+  autoScrollFrame=requestAnimationFrame(advanceAutoScroll);
+}
+function startAutoScroll(){
+  stopAutoScroll();
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  autoScrollDelay=setTimeout(()=>{autoScrollPosition=window.scrollY;autoScrollFrame=requestAnimationFrame(advanceAutoScroll);},2000);
+}
+['wheel','touchstart','pointerdown'].forEach(type=>document.addEventListener(type,stopAutoScroll,{passive:true,capture:true}));
+document.addEventListener('keydown',stopAutoScroll);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAutoScroll();});
