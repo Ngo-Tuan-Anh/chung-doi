@@ -33,7 +33,6 @@ const lightbox=document.getElementById('lightbox');
 const album=document.getElementById('album'),gallery=document.getElementById('gallery');
 const photos=c.gallery||[],slides=[],dots=[];
 let activePhoto=0,albumTimer=null,albumVisible=false,albumPaused=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const albumToggle=document.getElementById('album-toggle');
 function renderAlbum(){
   slides.forEach((slide,i)=>{
     const offset=(i-activePhoto+photos.length)%photos.length;
@@ -45,7 +44,7 @@ function renderAlbum(){
 }
 function stopAlbum(){clearInterval(albumTimer);albumTimer=null;}
 function syncAlbum(){
-  stopAlbum();albumToggle.textContent=albumPaused?'Tự động chạy':'Tạm dừng';
+  stopAlbum();
   if(photos.length>1&&albumVisible&&!albumPaused&&!document.hidden&&!lightbox.open)albumTimer=setInterval(()=>{activePhoto=(activePhoto+1)%photos.length;renderAlbum();},3500);
 }
 function movePhoto(step){if(!photos.length)return;activePhoto=(activePhoto+step+photos.length)%photos.length;renderAlbum();syncAlbum();}
@@ -56,7 +55,6 @@ photos.forEach((src,i)=>{
 });
 document.getElementById('album-prev').onclick=()=>movePhoto(-1);
 document.getElementById('album-next').onclick=()=>movePhoto(1);
-albumToggle.onclick=()=>{albumPaused=!albumPaused;syncAlbum();};
 album.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();movePhoto(e.key==='ArrowLeft'?-1:1);}});
 let touchStartX=null;
 gallery.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;},{passive:true});
