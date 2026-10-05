@@ -17,7 +17,7 @@ window.WEDDING = {
   brideMapUrl: "https://maps.app.goo.gl/Lbedj6FZY1n9NP8n7",
   // Điền ảnh QR của bạn; để trống khi chưa có thông tin tài khoản.
   gifts: [
-    { label: "Mừng cưới chú rể", qrImage: "", bank: "", accountNumber: "", accountName: "" },
+    { label: "Mừng cưới chú rể", qrImage: "assets/groom-qr.png", bank: "MSB", accountNumber: "8827021999", accountName: "NGO TUAN ANH" },
     { label: "Mừng cưới cô dâu", qrImage: "", bank: "", accountNumber: "", accountName: "" },
   ],
   rsvpEmail: "",
