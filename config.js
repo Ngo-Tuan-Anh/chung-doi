@@ -22,6 +22,7 @@ window.WEDDING = {
   ],
   rsvpEmail: "",
   music: "",
+  musicYoutubeId: "i0yxWxk_e20",
   gallery: [
     "assets/photo-1.webp",
     "assets/photo-2.webp",

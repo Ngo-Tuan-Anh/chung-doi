@@ -27,3 +27,5 @@ Nếu thiếu hoặc để trống `guest`, thiệp hiển thị “Quý khách�
 ## Bản đồ và mã QR mừng cưới
 
 Trong config.js, điền venueMapUrl, groomMapUrl và brideMapUrl bằng link Google Maps chính xác nếu có. Để trống thì website tạo link tìm kiếm theo địa chỉ. Mục gifts chứa hai hộp thông tin cô dâu/chú rể: đặt qrImage thành đường dẫn ảnh QR (ví dụ assets/qr-chu-re.png), cùng bank, accountNumber và accountName. Khi chưa có ảnh QR, hộp quà hiển thị thông báo chờ cập nhật, không dùng tài khoản demo.
+
+Nhạc cưới: musicYoutubeId là ID video YouTube, hiện dùng i0yxWxk_e20 (Bài này không để đi diễn). Video tải khi mở thiệp, có điều khiển bật/tắt và liên kết nghe trực tiếp. Nếu trình duyệt chặn phát tự động, khách bấm nút phát hoặc ♫. Để dùng tệp nhạc trực tiếp, xóa musicYoutubeId và điền music.

@@ -34,10 +34,46 @@ c.gallery.forEach((src,i)=>{const b=document.createElement('button'),img=documen
 document.getElementById('close-photo').onclick=()=>lightbox.close();
 lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.close();});
 const audio=document.getElementById('audio'),music=document.getElementById('music');
-if(c.music){audio.src=c.music;music.hidden=false;}
-function musicLabel(){music.textContent=audio.paused?'♫':'Ⅱ';music.setAttribute('aria-label',audio.paused?'Bật nhạc':'Tắt nhạc');}
-music.onclick=async()=>{if(audio.paused){try{await audio.play();}catch{}}else audio.pause();musicLabel();};
-document.getElementById('open').onclick=()=>{document.getElementById('envelope').classList.add('opened');document.body.classList.remove('sealed');document.getElementById('invitation').inert=false;document.querySelector('.scroll').focus({preventScroll:true});if(c.music)audio.play().then(musicLabel).catch(musicLabel);};
+const youtubeId=/^[A-Za-z0-9_-]{11}$/.test(c.musicYoutubeId||'')?c.musicYoutubeId:'';
+let youtubePlayer=null,youtubeReady=false,musicStarted=false,wantsMusic=false;
+function setMusicLabel(playing){music.textContent=playing?'Ⅱ':'♫';music.setAttribute('aria-label',playing?'Tắt nhạc':'Bật nhạc');}
+function musicLabel(){setMusicLabel(!audio.paused);}
+const musicStatus=document.getElementById('music-status');
+if(youtubeId){music.hidden=false;document.getElementById('wedding-music').hidden=false;}
+else if(c.music){audio.src=c.music;music.hidden=false;}
+function createYoutubePlayer(){
+  if(youtubePlayer)return;
+  youtubePlayer=new YT.Player('youtube-player',{
+    width:'100%',height:'300',videoId:youtubeId,
+    playerVars:{playsinline:1,controls:1,loop:1,playlist:youtubeId,origin:location.origin},
+    events:{
+      onReady:event=>{youtubeReady=true;event.target.getIframe().title='Bài này không để đi diễn · Anh Tú Atus & Diệu Nhi';if(wantsMusic)event.target.playVideo();},
+      onStateChange:event=>{const playing=event.data===YT.PlayerState.PLAYING;setMusicLabel(playing);if(playing)musicStatus.textContent='';if(event.data===YT.PlayerState.PAUSED)wantsMusic=false;},
+      onAutoplayBlocked:()=>{setMusicLabel(false);musicStatus.textContent='Nhấn nút phát trên video hoặc nút ♫ để nghe nhạc.';},
+      onError:()=>{setMusicLabel(false);musicStatus.textContent='Chưa phát được video tại đây. Bạn có thể nghe bằng liên kết YouTube bên dưới.';}
+    }
+  });
+}
+function startYoutubeMusic(){
+  wantsMusic=true;
+  if(youtubeReady){youtubePlayer.playVideo();return;}
+  if(musicStarted)return;
+  musicStarted=true;musicStatus.textContent='Đang tải nhạc…';
+  if(window.YT?.Player){createYoutubePlayer();return;}
+  window.onYouTubeIframeAPIReady=createYoutubePlayer;
+  const script=document.createElement('script');script.src='https://www.youtube.com/iframe_api';script.async=true;
+  script.onerror=()=>{musicStarted=false;musicStatus.textContent='Chưa tải được nhạc. Bạn có thể nghe trên YouTube bên dưới.';};
+  document.head.append(script);
+}
+music.onclick=async()=>{
+  if(youtubeId){if(youtubeReady&&youtubePlayer.getPlayerState()===YT.PlayerState.PLAYING){wantsMusic=false;youtubePlayer.pauseVideo();}else startYoutubeMusic();}
+  else{if(audio.paused){try{await audio.play();}catch{}}else audio.pause();musicLabel();}
+};
+document.getElementById('open').onclick=()=>{
+  document.getElementById('envelope').classList.add('opened');document.body.classList.remove('sealed');document.getElementById('invitation').inert=false;
+  document.querySelector('.scroll').focus({preventScroll:true});
+  if(youtubeId)startYoutubeMusic();else if(c.music)audio.play().then(musicLabel).catch(musicLabel);
+};
 document.getElementById('rsvp').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);const text=`Tên: ${f.get('name')}\nTham dự: ${f.get('attendance')}\nLời chúc: ${f.get('wish')||''}`;if(c.rsvpEmail){location.href=`mailto:${c.rsvpEmail}?subject=${encodeURIComponent('Xác nhận dự cưới: '+f.get('name'))}&body=${encodeURIComponent(text)}`;document.getElementById('form-status').textContent='Ứng dụng email sẽ mở. Vui lòng gửi email để hoàn tất xác nhận.';}else{const blob=new Blob([text],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='xac-nhan-du-cuoi.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);document.getElementById('form-status').textContent='Đã tải lời xác nhận. Bạn hãy gửi tệp này cho cô dâu hoặc chú rể để hoàn tất.';}});
 
 const giftDialog=document.getElementById('gift-dialog');
