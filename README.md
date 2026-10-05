@@ -1,17 +1,17 @@
-# Thi?p c??i Song Ph?ng Xanh
+# Thiệp cưới Song Phụng Xanh
 
-Trang m?i t?nh HTML/CSS/JavaScript, d?ng theo m?u https://chungdoi.com/vi/mau-thiep/song-phung-xanh/demo. Kh?ng c?n build ho?c backend. H?nh trang tr? v? ?nh demo l?u trong `assets/`; h?y thay ?nh demo b?ng ?nh c?a b?n tr??c khi g?i kh?ch.
+Trang tĩnh HTML/CSS/JavaScript theo mẫu https://chungdoi.com/vi/mau-thiep/song-phung-xanh/demo. Không cần build. Ảnh và họa tiết nằm trong assets/. Dữ liệu hiện tại là dữ liệu demo, hãy thay bằng thông tin và ảnh của bạn.
 
-## Ch?nh th?ng tin
+## Cấu hình
 
-S?a `config.js`: t?n c? d?u/ch? r?, ng?y gi? (m?i gi? Vi?t Nam), ??a ch?, b? m?, album v? ch??ng tr?nh. D? li?u hi?n t?i l? d? li?u m?u. ??t `rsvpEmail` ?? g?i x?c nh?n qua ?ng d?ng email; n?u ?? tr?ng, kh?ch t?i t?p x?c nh?n ?? g?i cho b?n. Trang t?nh kh?ng l?u l?i ch?c ho?c danh s?ch tham d? tr?n m?y ch?. ??t `music` th?nh ???ng d?n t?p nh?c c?a b?n ?? b?t n?t nh?c.
+Sửa config.js để đổi tên, ngày giờ (múi giờ Việt Nam), địa chỉ, gia đình, ảnh và chương trình. Đặt rsvpEmail để khách gửi xác nhận qua ứng dụng email; khi để trống, khách tải tệp xác nhận rồi gửi cho bạn. Trang tĩnh không lưu phản hồi trên máy chủ. Đặt music thành đường dẫn tệp nhạc để bật nhạc.
 
-C? nh?n h?a t?n kh?ch b?ng `?guest=Nguy?n%20V?n%20A` ? cu?i URL. Kh?ng d?ng s? t?i kho?n ho?c QR thanh to?n demo.
+Thêm ?guest=Nguyễn%20Văn%20A vào cuối URL để cá nhân hóa tên khách.
 
-## Xem t?i m?y
+## Xem trang
 
-M? `index.html` ho?c ch?y `python -m http.server 8000` trong th? m?c n?y r?i truy c?p http://localhost:8000.
+Mở index.html hoặc chạy python -m http.server 8000 trong thư mục này rồi mở http://localhost:8000.
 
 ## GitHub Pages
 
-Workflow `.github/workflows/pages.yml` tri?n khai trang khi push v?o `main`. Trong GitHub repository ? Settings ? Pages ? Build and deployment ? Source, ch?n **GitHub Actions**. ??a ch? d? ki?n: https://ngo-tuan-anh.github.io/chung-doi/ . Workflow c?ng ch?y th? c?ng ???c t? Actions.
+Workflow .github/workflows/pages.yml triển khai khi push main. Vào repository → Settings → Pages → Source → chọn GitHub Actions. URL dự kiến: https://ngo-tuan-anh.github.io/chung-doi/
