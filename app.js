@@ -71,13 +71,13 @@ document.getElementById('close-photo').onclick=()=>lightbox.close();
 lightbox.addEventListener('close',syncAlbum);
 lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.close();});
 const audio=document.getElementById('audio'),music=document.getElementById('music');
-const youtubeId=/^[A-Za-z0-9_-]{11}$/.test(c.musicYoutubeId||'')?c.musicYoutubeId:'';
+const youtubeId=!c.music&&/^[A-Za-z0-9_-]{11}$/.test(c.musicYoutubeId||'')?c.musicYoutubeId:'';
 let youtubePlayer=null,youtubeReady=false,musicStarted=false,wantsMusic=false;
 function setMusicLabel(playing){music.textContent=playing?'Ⅱ':'♫';music.setAttribute('aria-label',playing?'Tắt nhạc':'Bật nhạc');}
 function musicLabel(){setMusicLabel(!audio.paused);}
 const musicStatus=document.getElementById('music-status');
 if(youtubeId){music.hidden=false;}
-else if(c.music){audio.src=c.music;music.hidden=false;}
+else if(c.music){audio.src=c.music;audio.preload='auto';audio.load();music.hidden=false;}
 function createYoutubePlayer(){
   if(youtubePlayer)return;
   youtubePlayer=new YT.Player('youtube-player',{
@@ -91,9 +91,9 @@ function createYoutubePlayer(){
     }
   });
 }
-function startYoutubeMusic(){
-  wantsMusic=true;
-  if(youtubeReady){youtubePlayer.playVideo();return;}
+function startYoutubeMusic(play=true){
+  wantsMusic=play;
+  if(youtubeReady){if(play)youtubePlayer.playVideo();return;}
   if(musicStarted)return;
   musicStarted=true;musicStatus.textContent='Đang tải nhạc…';
   if(window.YT?.Player){createYoutubePlayer();return;}
@@ -102,6 +102,7 @@ function startYoutubeMusic(){
   script.onerror=()=>{musicStarted=false;musicStatus.textContent='Chưa tải được nhạc. Bạn có thể nghe trên YouTube bên dưới.';};
   document.head.append(script);
 }
+if(youtubeId)startYoutubeMusic(false);
 music.onclick=async()=>{
   if(youtubeId){if(youtubeReady&&youtubePlayer.getPlayerState()===YT.PlayerState.PLAYING){wantsMusic=false;youtubePlayer.pauseVideo();}else startYoutubeMusic();}
   else{if(audio.paused){try{await audio.play();}catch{}}else audio.pause();musicLabel();}
