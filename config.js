@@ -12,8 +12,8 @@ window.WEDDING = {
   brideAddress: "Số 5 ngõ 2 đường Bình Yên, Thường Tín, Hà Nội",
   groomAddress: "Số 9 ngách 156/21 Phương Liệt, phường Phương Liệt, Hà Nội",
   // Có thể dán liên kết Google Maps chính xác vào ba trường dưới đây.
-  venueMapUrl: "",
-  groomMapUrl: "",
+  venueMapUrl: "https://maps.app.goo.gl/ina4r2x3y8wQHAYbA",
+  groomMapUrl: "https://maps.app.goo.gl/cDYFQM7iXZ2YAcwr9",
   brideMapUrl: "",
   // Điền ảnh QR của bạn; để trống khi chưa có thông tin tài khoản.
   gifts: [
