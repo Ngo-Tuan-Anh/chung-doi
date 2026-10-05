@@ -3,7 +3,7 @@ window.WEDDING = {
   groom: "Tuấn Anh",
   date: "2026-10-18",
   time: "17:00",
-  ceremonyTime: "17:00",
+  ceremonyTime: "18:00",
   guest: "GĐ bác Mạnh - Nhung",
   venue: "Trung tâm tiệc cưới Sun Palace",
   address: "1111 đường Giải Phóng, Hoàng Mai, Hà Nội",
@@ -21,8 +21,8 @@ window.WEDDING = {
     { label: "Mừng cưới cô dâu", qrImage: "", bank: "", accountNumber: "", accountName: "" },
   ],
   rsvpEmail: "",
-  music: "",
-  musicYoutubeId: "i0yxWxk_e20",
+  music: "assets/wedding-song.mp3",
+  musicYoutubeId: "",
   gallery: [
     "assets/photo-1.webp",
     "assets/photo-2.webp",
@@ -35,5 +35,9 @@ window.WEDDING = {
     "assets/photo-9.webp",
     "assets/photo-10.webp",
   ],
-  timeline: [["17:00", "Tiệc mừng lễ thành hôn"]],
+  timeline: [
+    ["17:00", "Đón khách"],
+    ["17:45", "Khai tiệc, phục vụ món ăn"],
+    ["18:00", "Nghi lễ thành hôn"],
+  ],
 };
