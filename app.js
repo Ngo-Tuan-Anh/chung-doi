@@ -116,7 +116,6 @@ document.getElementById('open').onclick=()=>{
   startAutoScroll();
   if(youtubeId)startYoutubeMusic();else if(c.music)audio.play().then(musicLabel).catch(musicLabel);
 };
-document.getElementById('rsvp').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);const text=`Tên: ${f.get('name')}\nTham dự: ${f.get('attendance')}\nLời chúc: ${f.get('wish')||''}`;if(c.rsvpEmail){location.href=`mailto:${c.rsvpEmail}?subject=${encodeURIComponent('Xác nhận dự cưới: '+f.get('name'))}&body=${encodeURIComponent(text)}`;document.getElementById('form-status').textContent='Ứng dụng email sẽ mở. Vui lòng gửi email để hoàn tất xác nhận.';}else{const blob=new Blob([text],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='xac-nhan-du-cuoi.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);document.getElementById('form-status').textContent='Đã tải lời xác nhận. Bạn hãy gửi tệp này cho cô dâu hoặc chú rể để hoàn tất.';}});
 
 const giftDialog=document.getElementById('gift-dialog');
 document.getElementById('open-gifts').onclick=()=>giftDialog.showModal();
