@@ -114,6 +114,7 @@ document.getElementById('open').onclick=()=>{
   document.getElementById('envelope').classList.add('opened');document.body.classList.remove('sealed');document.getElementById('invitation').inert=false;
   document.getElementById('invitation').focus({preventScroll:true});
   startAutoScroll();
+  launchFireworks();
   if(youtubeId)startYoutubeMusic();else if(c.music)audio.play().then(musicLabel).catch(musicLabel);
 };
 
@@ -160,3 +161,31 @@ function startAutoScroll(){
 ['wheel','touchstart','pointerdown'].forEach(type=>document.addEventListener(type,stopAutoScroll,{passive:true,capture:true}));
 document.addEventListener('keydown',stopAutoScroll);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAutoScroll();});
+
+// Short decorative fireworks when the invitation opens.
+function launchFireworks(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const canvas=document.createElement('canvas');canvas.className='opening-fireworks';canvas.setAttribute('aria-hidden','true');
+  const ctx=canvas.getContext('2d');if(!ctx)return;
+  document.body.append(canvas);
+  let width,height,frame,started=null,last=null,nextBurst=0;
+  const particles=[],colors=['#ffe7a0','#ffd166','#fff0e7','#a8e6cf','#ff9caa'];
+  function resize(){width=window.innerWidth;height=window.innerHeight;const ratio=Math.min(window.devicePixelRatio||1,2);canvas.width=width*ratio;canvas.height=height*ratio;ctx.setTransform(ratio,0,0,ratio,0,0);}
+  function cleanup(){cancelAnimationFrame(frame);canvas.remove();window.removeEventListener('resize',resize);document.removeEventListener('visibilitychange',onVisibility);}
+  function onVisibility(){if(document.hidden)cleanup();}
+  function burst(){
+    const x=width*(.15+Math.random()*.7),y=height*(.12+Math.random()*.4),color=colors[Math.floor(Math.random()*colors.length)];
+    for(let i=0;i<48;i++){const angle=Math.PI*2*i/48,speed=65+Math.random()*110;particles.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life:0,duration:1.2+Math.random()*.6,color});}
+  }
+  function animate(time){
+    if(started===null){started=time;last=time;}
+    const elapsed=time-started,dt=Math.min((time-last)/1000,.05);last=time;
+    ctx.clearRect(0,0,width,height);
+    if(elapsed<2400&&elapsed>=nextBurst){burst();nextBurst=elapsed+380;}
+    for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.life+=dt;if(p.life>=p.duration){particles.splice(i,1);continue;}p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=75*dt;ctx.globalAlpha=1-p.life/p.duration;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,2,0,Math.PI*2);ctx.fill();}
+    ctx.globalAlpha=1;
+    if(elapsed>4500){cleanup();return;}
+    frame=requestAnimationFrame(animate);
+  }
+  resize();window.addEventListener('resize',resize);document.addEventListener('visibilitychange',onVisibility);frame=requestAnimationFrame(animate);
+}
