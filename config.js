@@ -1,25 +1,19 @@
 window.WEDDING = {
-  "bride": "Ngọc Ánh",
-  "groom": "Thế Bảo",
-  "date": "2026-05-17",
-  "time": "18:00",
-  "ceremonyTime": "09:00",
-  "guest": "GĐ bác Mạnh - Nhung",
-  "venue": "VinPalace Cổ Loa",
-  "address": "Đông Hội, Đông Anh, Hà Nội",
-  "brideParents": [
-    "Trần Văn Long",
-    "Phạm Thị Hoa"
-  ],
-  "groomParents": [
-    "Nguyễn Văn Hùng",
-    "Lê Thị Thu"
-  ],
-  "brideAddress": "12 Nguyễn Trãi, Thanh Xuân, Hà Nội",
-  "groomAddress": "45 Phố Huế, Hai Bà Trưng, Hà Nội",
-  "rsvpEmail": "",
-  "music": "",
-  "gallery": [
+  bride: "Tuấn Anh",
+  groom: "Thu Hà",
+  date: "2026-05-17",
+  time: "18:00",
+  ceremonyTime: "09:00",
+  guest: "GĐ bác Mạnh - Nhung",
+  venue: "VinPalace Cổ Loa",
+  address: "Đông Hội, Đông Anh, Hà Nội",
+  brideParents: ["Trần Văn Long", "Phạm Thị Hoa"],
+  groomParents: ["Nguyễn Văn Hùng", "Lê Thị Thu"],
+  brideAddress: "12 Nguyễn Trãi, Thanh Xuân, Hà Nội",
+  groomAddress: "45 Phố Huế, Hai Bà Trưng, Hà Nội",
+  rsvpEmail: "",
+  music: "",
+  gallery: [
     "assets/photo-1.webp",
     "assets/photo-2.webp",
     "assets/photo-3.webp",
@@ -29,28 +23,13 @@ window.WEDDING = {
     "assets/photo-7.webp",
     "assets/photo-8.webp",
     "assets/photo-9.webp",
-    "assets/photo-10.webp"
+    "assets/photo-10.webp",
   ],
-  "timeline": [
-    [
-      "17:30",
-      "Đón khách"
-    ],
-    [
-      "18:30",
-      "Khai tiệc"
-    ],
-    [
-      "18:45",
-      "Rót rượu, cắt bánh"
-    ],
-    [
-      "19:00",
-      "Phục vụ món chính"
-    ],
-    [
-      "21:00",
-      "Kết thúc tiệc"
-    ]
-  ]
+  timeline: [
+    ["17:30", "Đón khách"],
+    ["18:30", "Khai tiệc"],
+    ["18:45", "Rót rượu, cắt bánh"],
+    ["19:00", "Phục vụ món chính"],
+    ["21:00", "Kết thúc tiệc"],
+  ],
 };
