@@ -43,3 +43,6 @@ h1,h2,.couple,.hero h2{font-family:"Playfair Display",Baskerville,"Times New Rom
 .families>div{display:flex;flex-direction:column;min-width:0}.families .address-link{margin-top:auto}
 
 .opening-fireworks{position:fixed;inset:0;width:100%;height:100%;z-index:20;pointer-events:none}
+
+.hero-slideshow{position:absolute;inset:0;overflow:hidden}.hero-track{display:flex;width:100%;height:100%;animation:hero-slide 6s infinite;animation-play-state:paused}.hero-track .hero-photo{flex:0 0 100%;min-width:100%}.hero.slideshow-running .hero-track{animation-play-state:running}
+@keyframes hero-slide{0%,38%{transform:translateX(0)}50%,88%{transform:translateX(-100%)}100%{transform:translateX(-200%)}}

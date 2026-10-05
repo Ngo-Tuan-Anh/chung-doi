@@ -115,6 +115,7 @@ document.getElementById('open').onclick=()=>{
   document.getElementById('invitation').focus({preventScroll:true});
   startAutoScroll();
   launchFireworks();
+  document.querySelector('.hero').classList.add('slideshow-running');
   if(youtubeId)startYoutubeMusic();else if(c.music)audio.play().then(musicLabel).catch(musicLabel);
 };
 
