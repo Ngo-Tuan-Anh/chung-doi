@@ -39,5 +39,6 @@ window.WEDDING = {
     ["17:00", "Đón khách"],
     ["17:45", "Khai tiệc, phục vụ món ăn"],
     ["18:00", "Nghi lễ thành hôn"],
+    ["20:00", "Kết thúc tiệc"],
   ],
 };
