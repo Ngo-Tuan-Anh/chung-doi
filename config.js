@@ -9,7 +9,7 @@ window.WEDDING = {
   address: "1111 đường Giải Phóng, Hoàng Mai, Hà Nội",
   brideParents: ["Nguyễn Văn Hưng", "Nguyễn Thị Phúc"],
   groomParents: ["Ngô Văn Điện", "Ngô Thị Vy"],
-  brideAddress: "Số 5 ngõ 2 đường Bình Yên, Thường Tín, Hà Nội",
+  brideAddress: "Số 5 ngõ 2 đường Bình Yên, Văn Trai, Thường Tín, Hà Nội",
   groomAddress: "Số 9 ngách 156/21 Phương Liệt, phường Phương Liệt, Hà Nội",
   // Có thể dán liên kết Google Maps chính xác vào ba trường dưới đây.
   venueMapUrl: "https://maps.app.goo.gl/ina4r2x3y8wQHAYbA",
