@@ -1,6 +1,7 @@
 "use strict";
 const c=window.WEDDING;
 const brideFirst=new URLSearchParams(location.search).get('side')==='girl';
+if(brideFirst&&c.brideMusic)c.music=c.brideMusic;
 if(brideFirst){
   document.querySelectorAll('[data-bind="groom"],[data-bind="bride"]').forEach(el=>{el.dataset.bind=el.dataset.bind==='groom'?'bride':'groom';});
   const families=document.querySelector('.families');
