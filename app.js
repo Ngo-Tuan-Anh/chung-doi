@@ -24,9 +24,10 @@ document.getElementById('map').href=mapLink(c.venueMapUrl,c.venue+', '+c.address
 document.getElementById('groom-map').href=mapLink(c.groomMapUrl,c.groomAddress);
 document.getElementById('bride-map').href=mapLink(c.brideMapUrl,c.brideAddress);
 if(brideFirst){
-  document.getElementById('announcement-heading').innerHTML='TR\u00c2N TR\u1eccNG TH\u00d4NG B\u00c1O<br>B\u1eeeA C\u01a0M TH\u00c2N M\u1eacT';
+  document.getElementById('announcement-heading').textContent='TR\u00c2N TR\u1eccNG TH\u00d4NG B\u00c1O';
+  document.querySelector('#announcement .couple').hidden=true;
   const details=document.getElementById('ceremony-details');
-  details.innerHTML='<p class="eyebrow">\u0110\u01af\u1ee2C T\u1ed4 CH\u1ee8C V\u00c0O 17:00 - TH\u1ee8 7</p><p>17 th\u00e1ng 10, 2026</p><p>t\u1ee9c 8 th\u00e1ng 9, 2026 \u00e2m</p><div class="flourish" aria-hidden="true">\u2766</div><h2>L\u1ec4 VU QUY</h2><p class="eyebrow">\u0110\u01af\u1ee2C T\u1ed4 CH\u1ee8C V\u00c0O 13:00 - CH\u1ee6 NH\u1eacT</p><p>18 th\u00e1ng 10, 2026</p><p>t\u1ee9c 9 th\u00e1ng 9, 2026 \u00e2m</p><h3>T\u1ea1i t\u01b0 gia nh\u00e0 g\u00e1i</h3>';
+  details.innerHTML='<h2>B\u1eeeA C\u01a0M TH\u00c2N M\u1eacT</h2><p class="eyebrow">\u0110\u01af\u1ee2C T\u1ed4 CH\u1ee8C V\u00c0O 17:00 - TH\u1ee8 7</p><p>17 th\u00e1ng 10, 2026</p><p>t\u1ee9c 8 th\u00e1ng 9, 2026 \u00e2m</p><div class="flourish" aria-hidden="true">\u2766</div><h2>L\u1ec4 VU QUY</h2><p class="eyebrow">\u0110\u01af\u1ee2C T\u1ed4 CH\u1ee8C V\u00c0O 13:00 - CH\u1ee6 NH\u1eacT</p><p>18 th\u00e1ng 10, 2026</p><p>t\u1ee9c 9 th\u00e1ng 9, 2026 \u00e2m</p><h3>T\u1ea1i t\u01b0 gia nh\u00e0 g\u00e1i</h3>';
   const address=document.createElement('p');address.textContent=c.brideAddress;
   const link=document.createElement('a');link.className='address-link';link.textContent='Ch\u1ec9 \u0111\u01b0\u1eddng nh\u00e0 g\u00e1i \u2197';link.href=mapLink(c.brideMapUrl,c.brideAddress);link.target='_blank';link.rel='noopener';details.append(address,link);
 }
