@@ -18,7 +18,7 @@ window.WEDDING = {
   // Điền ảnh QR của bạn; để trống khi chưa có thông tin tài khoản.
   gifts: [
     { label: "Mừng cưới chú rể", qrImage: "assets/groom-qr-code.png", bank: "MSB", accountNumber: "8827021999", accountName: "NGO TUAN ANH" },
-    { label: "Mừng cưới cô dâu", qrImage: "", bank: "", accountNumber: "", accountName: "" },
+    { label: "Mừng cưới cô dâu", qrImage: "assets/bride-qr-code.png", bank: "TPBank", accountNumber: "05243991801", accountName: "NGUYEN THU HA" },
   ],
   rsvpEmail: "",
   music: "assets/wedding-song.mp3",
