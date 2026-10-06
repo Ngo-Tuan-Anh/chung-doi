@@ -1,8 +1,15 @@
 "use strict";
 const c=window.WEDDING;
+const brideFirst=new URLSearchParams(location.search).get('side')==='girl';
+if(brideFirst){
+  document.querySelectorAll('[data-bind="groom"],[data-bind="bride"]').forEach(el=>{el.dataset.bind=el.dataset.bind==='groom'?'bride':'groom';});
+  const families=document.querySelector('.families');
+  families.prepend(document.getElementById('bride-parents').parentElement);
+}
+
 const date=new Date(`${c.date}T${c.time}:00+07:00`);
 const dateText=new Intl.DateTimeFormat('vi-VN',{day:'numeric',month:'long',year:'numeric',timeZone:'Asia/Ho_Chi_Minh'}).format(date);
-document.title=`${c.bride} & ${c.groom} · Thiệp mời thành hôn`;
+document.title=`${brideFirst?c.bride:c.groom} & ${brideFirst?c.groom:c.bride} · Thiệp mời thành hôn`;
 document.querySelectorAll('[data-bind]').forEach(el=>el.textContent=c[el.dataset.bind]||'');
 document.querySelectorAll('[data-date]').forEach(el=>el.textContent=dateText);
 const guestParam=new URLSearchParams(location.search).get('guest');
@@ -124,7 +131,9 @@ document.getElementById('open-gifts').onclick=()=>giftDialog.showModal();
 document.getElementById('close-gifts').onclick=()=>giftDialog.close();
 giftDialog.addEventListener('click',e=>{if(e.target===giftDialog){const rect=giftDialog.getBoundingClientRect();if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom)giftDialog.close();}});
 const giftAccounts=document.getElementById('gift-accounts');
-(c.gifts||[]).forEach(gift=>{
+const orderedGifts=[...(c.gifts||[])];
+if(brideFirst)orderedGifts.reverse();
+orderedGifts.forEach(gift=>{
   const card=document.createElement('article');card.className='gift-account';
   const title=document.createElement('h3');title.textContent=gift.label;card.append(title);
   if(gift.qrImage){
