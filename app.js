@@ -28,9 +28,10 @@ if(brideFirst){
   document.querySelector('#announcement .couple').hidden=true;
   document.getElementById('reception-venue').hidden=true;
   const details=document.getElementById('ceremony-details');
-  details.innerHTML='<h2>B\u1eeeA C\u01a0M TH\u00c2N M\u1eacT</h2><p class="eyebrow">\u0110\u01af\u1ee2C T\u1ed4 CH\u1ee8C V\u00c0O 17:00 - TH\u1ee8 7</p><p>17 th\u00e1ng 10, 2026</p><p>t\u1ee9c 8 th\u00e1ng 9, 2026 \u00e2m</p><div class="flourish" aria-hidden="true">\u2766</div><h2>L\u1ec4 VU QUY</h2><p class="eyebrow">\u0110\u01af\u1ee2C T\u1ed4 CH\u1ee8C V\u00c0O 13:00 - CH\u1ee6 NH\u1eacT</p><p>18 th\u00e1ng 10, 2026</p><p>t\u1ee9c 9 th\u00e1ng 9, 2026 \u00e2m</p><h3>T\u1ea1i t\u01b0 gia nh\u00e0 g\u00e1i</h3>';
+  details.classList.add('bride-events');
+  details.innerHTML='<div class="ceremony-event"><h2>B\u1eeeA C\u01a0M TH\u00c2N M\u1eacT</h2><p class="ceremony-clock">17:00 <span>\u00b7 Th\u1ee9 B\u1ea3y</span></p><p class="ceremony-date">17 th\u00e1ng 10, 2026</p><p class="ceremony-lunar">T\u1ee9c 8 th\u00e1ng 9, 2026 \u00e2m</p></div><div class="ceremony-event"><h2>L\u1ec4 VU QUY</h2><p class="ceremony-clock">13:00 <span>\u00b7 Ch\u1ee7 Nh\u1eadt</span></p><p class="ceremony-date">18 th\u00e1ng 10, 2026</p><p class="ceremony-lunar">T\u1ee9c 9 th\u00e1ng 9, 2026 \u00e2m</p></div><div class="ceremony-location"><h3>T\u1ea1i t\u01b0 gia nh\u00e0 g\u00e1i</h3></div>';
   const address=document.createElement('p');address.textContent=c.brideAddress;
-  const link=document.createElement('a');link.className='address-link';link.textContent='Ch\u1ec9 \u0111\u01b0\u1eddng nh\u00e0 g\u00e1i \u2197';link.href=mapLink(c.brideMapUrl,c.brideAddress);link.target='_blank';link.rel='noopener';details.append(address,link);
+  const link=document.createElement('a');link.className='address-link';link.textContent='Ch\u1ec9 \u0111\u01b0\u1eddng nh\u00e0 g\u00e1i \u2197';link.href=mapLink(c.brideMapUrl,c.brideAddress);link.target='_blank';link.rel='noopener';details.querySelector('.ceremony-location').append(address,link);
 }
 
 const [year,month,day]=c.date.split('-').map(Number);
