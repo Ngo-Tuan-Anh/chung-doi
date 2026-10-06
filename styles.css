@@ -70,3 +70,5 @@ h1,h2,.couple,.hero h2{font-family:"Playfair Display",Baskerville,"Times New Rom
 .bride-events .ceremony-clock{font-size:15px;line-height:1.6;margin-bottom:18px}
 
 .bride-events .ceremony-clock{font-size:15px;line-height:1.6}
+
+section[hidden]{display:none}
