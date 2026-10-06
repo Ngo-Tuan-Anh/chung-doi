@@ -34,6 +34,7 @@ window.WEDDING = {
     "assets/T_T08506.webp",
     "assets/T_T08623.webp",
     "assets/T_T08762.webp",
+    "assets/T_T08869.webp",
     "assets/T_T09055.webp",
   ],
   timeline: [
