@@ -9,10 +9,11 @@ if(brideFirst){
 }
 
 const date=new Date(`${c.date}T${c.time}:00+07:00`);
-const dateText=new Intl.DateTimeFormat('vi-VN',{day:'numeric',month:'long',year:'numeric',timeZone:'Asia/Ho_Chi_Minh'}).format(date);
+const dateText=new Intl.DateTimeFormat('vi-VN',{day:'numeric',month:'long',year:'numeric',timeZone:'Asia/Ho_Chi_Minh'}).format(date).replace(', ',brideFirst?', ':' n\u0103m ');
 document.title=`${brideFirst?c.bride:c.groom} & ${brideFirst?c.groom:c.bride} · Thiệp mời thành hôn`;
 document.querySelectorAll('[data-bind]').forEach(el=>el.textContent=c[el.dataset.bind]||'');
 document.querySelectorAll('[data-date]').forEach(el=>el.textContent=dateText);
+document.querySelectorAll('.ceremony-numeric-date').forEach(el=>el.textContent=c.date.split('-').reverse().join('.'));
 const guestParam=new URLSearchParams(location.search).get('guest');
 const guest=guestParam?.trim() || 'Quý khách';
 document.querySelectorAll('.guest').forEach(el=>el.textContent=guest);
