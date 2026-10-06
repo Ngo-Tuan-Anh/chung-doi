@@ -59,3 +59,5 @@ h1,h2,.couple,.hero h2{font-family:"Playfair Display",Baskerville,"Times New Rom
 
 /* Center navigation glyphs independently of the body font metrics. */
 #lightbox .photo-nav{display:flex;align-items:center;justify-content:center;line-height:1;font-family:Arial,sans-serif;padding:0}.album-controls button{display:inline-flex;align-items:center;justify-content:center;line-height:1;min-height:38px}.album-controls #album-prev,.album-controls #album-next{font-family:Arial,sans-serif}
+
+#groom-parents,#bride-parents{white-space:pre-line}

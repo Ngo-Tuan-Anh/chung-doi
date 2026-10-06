@@ -8,7 +8,7 @@ document.querySelectorAll('[data-date]').forEach(el=>el.textContent=dateText);
 const guestParam=new URLSearchParams(location.search).get('guest');
 const guest=guestParam?.trim() || 'Quý khách';
 document.querySelectorAll('.guest').forEach(el=>el.textContent=guest);
-['bride','groom'].forEach(side=>document.getElementById(`${side}-parents`).textContent=c[`${side}Parents`].map((name,i)=>`${i?'Bà':'Ông'}: ${name}`).join(' · '));
+['bride','groom'].forEach(side=>document.getElementById(`${side}-parents`).textContent=c[`${side}Parents`].map((name,i)=>`${i?'Bà':'Ông'}: ${name}`).join('\n'));
 function mapLink(customUrl,address){
   if(customUrl){try{const url=new URL(customUrl);if(url.protocol==='https:'||url.protocol==='http:')return url.href;}catch{}}
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
