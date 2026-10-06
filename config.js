@@ -30,7 +30,7 @@ window.WEDDING = {
     "assets/T_T08068_1.webp",
     "assets/T_T08145.webp",
     "assets/T_T08337.webp",
-    "assets/T_T08438.webp",
+    "assets/T_T08452.webp",
     "assets/T_T08506.webp",
     "assets/T_T08623.webp",
     "assets/T_T08762.webp",
